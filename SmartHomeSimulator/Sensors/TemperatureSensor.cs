@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.Sensors
 {
-    internal class TemperatureSensor
+    internal class TemperatureSensor : Sensor
     {
+        public double Temperature { get; private set; }
+        public event Action<double> OnTemperatureChanged;
+        public TemperatureSensor(string name) : base(name) { }
+        public void SetTemperature(double temp)
+        {
+            Temperature = temp;
+            OnTemperatureChanged?.Invoke(temp);
+        }
     }
 }

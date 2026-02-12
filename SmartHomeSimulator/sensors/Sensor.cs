@@ -8,5 +8,7 @@ namespace SmartHomeSimulator.Sensors
 {
     internal class Sensor
     {
+        public string Name { get; set; }
+        public Sensor(string name) { Name = name; }
     }
 }
