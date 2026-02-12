@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.Automation
 {
-    internal class AutomationRule
+    public class AutomationRule
     {
+        public Func<double, bool> Condition { get; }
+        public Action Action { get; }
+        public AutomationRule(Func<double, bool> condition, Action action)
+        {
+            Condition = condition;
+            Action = action;
+        }
+        public void Evaluate(double value)
+        {
+            if (Condition(value)) Action();
+        }
     }
 }
