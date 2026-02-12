@@ -8,5 +8,9 @@ namespace SmartHomeSimulator.Devices
 {
     internal class Light
     {
+        public bool IsOn { get; private set; }
+        public Light(string name) : base(name) { }
+        public void TurnOn() => IsOn = true;
+        public void TurnOff() => IsOn = false;
     }
 }
