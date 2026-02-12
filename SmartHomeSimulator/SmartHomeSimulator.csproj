@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automation\AutomationRule.cs" />
+    <Compile Include="Automation\SmartHomeHub.cs" />
     <Compile Include="Devices\Device.cs" />
     <Compile Include="Devices\Light.cs" />
     <Compile Include="Program.cs" />
@@ -53,8 +55,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Automation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
