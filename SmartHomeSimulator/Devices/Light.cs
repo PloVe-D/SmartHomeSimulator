@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.Devices
 {
-    internal class Light
+    internal class Light: Device
     {
         public bool IsOn { get; private set; }
         public Light(string name) : base(name) { }

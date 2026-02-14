@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.Devices
 {
-    internal class Device
+    public class Device
     {
-        public string Name { get; set; }
-        public Device(string name) { Name = name; }
+        // Базовий клас для пристроїв
+        public string Name { get; private set; } 
+        public Device(string name)
+        {
+            Name = name; 
+        }
     }
 }
