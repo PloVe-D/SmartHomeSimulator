@@ -46,6 +46,7 @@
     <Compile Include="Automation\AutomationRule.cs" />
     <Compile Include="Automation\SmartHomeHub.cs" />
     <Compile Include="Devices\Device.cs" />
+    <Compile Include="Devices\Heater.cs" />
     <Compile Include="Devices\Light.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SmartHomeSimulator.Devices
+{
+    public class Heater : Device
+    {
+            public bool IsOn { get; private set; }
+            public Heater(string name) : base(name) { }
+            public void TurnOn() => IsOn = true;
+            public void TurnOff() => IsOn = false;
+       
+    }
+}
