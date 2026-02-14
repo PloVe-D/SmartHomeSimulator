@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.Sensors
 {
-    internal class TemperatureSensor : Sensor
+    public class TemperatureSensor : Sensor
     {
         public double Temperature { get; private set; }
         public event Action<double> OnTemperatureChanged;
