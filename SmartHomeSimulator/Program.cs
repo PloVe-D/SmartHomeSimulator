@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SmartHomeSimulator
@@ -18,6 +19,8 @@ namespace SmartHomeSimulator
             Light light = new Light("Living Room Light");
             TemperatureSensor tempSensor = new TemperatureSensor("Living Room Temp Sensor");
             SmartHomeHub hub = new SmartHomeHub();
+            Clock clock = Clock.Instance;
+            
 
             //зареєструвати пристрої та сенсори в хабі
             hub.RegisterSensor(tempSensor);
@@ -38,11 +41,11 @@ namespace SmartHomeSimulator
             //задати температуру та вивести стан світла/температури
             tempSensor.SetTemperature(19);
             StatusCheck(tempSensor, light);
-           
+            Thread.Sleep(2000);
             //змінити температуру -> спрацює правило -> вивести оновлений стан світла/температури
             tempSensor.SetTemperature(22);
             StatusCheck(tempSensor, light);
-
+            Thread.Sleep(2000);
             tempSensor.SetTemperature(30);
             StatusCheck(tempSensor, light);
 
@@ -50,7 +53,7 @@ namespace SmartHomeSimulator
 
         public static void StatusCheck(TemperatureSensor tempSensor, Light light)
         {
-            Console.WriteLine($"Temperature: {tempSensor.Temperature}°C, Light state: {(light.IsOn ? "On" : "Off")}");
+            Console.WriteLine($"Temperature: {tempSensor.Temperature}°C, Light state: {(light.IsOn ? "On" : "Off")} and it's {Clock.Instance.Now.ToString("HH:mm")} О'clock");
         }
     }
 }
