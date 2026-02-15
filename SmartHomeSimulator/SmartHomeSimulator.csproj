@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SmartHomeSimulator</RootNamespace>
     <AssemblyName>SmartHomeSimulator</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +54,7 @@
     <Compile Include="TimeDevices\Clock.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Sensors\TemperatureSensor.cs" />
+    <Compile Include="TimeDevices\ControlledClock.cs" />
     <Compile Include="TimeDevices\TimeDevice.cs" />
   </ItemGroup>
   <ItemGroup>
