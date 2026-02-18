@@ -1,4 +1,5 @@
 ﻿using SmartHomeSimulator.Sensors;
+using SmartHomeSimulator.SH_IntelDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace SmartHomeSimulator.TimeDevices
         public static ControlledClock Instance => _instance.Value;
 
         private DateTime _time;
-        public event Action<double> OnTimeChanged;
+        public event Action<IntelDevice> OnTimeChanged;
 
         private ControlledClock() : base("Controlled Clock")
         {
@@ -25,10 +26,10 @@ namespace SmartHomeSimulator.TimeDevices
         public override DateTime Now => _time;
 
         // Керуємо часом вручну (для симуляції / тестів)
-        public void SetTime(DateTime time)
+        public void SetTime(DateTime time, IntelDevice device)
         {
             _time = time;
-            OnTimeChanged?.Invoke(time.Hour);
+            OnTimeChanged?.Invoke(device);
         }
     }
 }

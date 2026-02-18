@@ -30,42 +30,31 @@ namespace SmartHomeSimulator
             hub.RegisterDevice(light);
             hub.RegisterDevice(heater);
 
-            //створити правило: якщо температура >20 та <25, увімкнути cвітло
-            //hub.AddRule(new AutomationRule
-            //    (
-            //        condition: temp => temp > 20 && temp < 25,          //bool
-            //        action: () => light.TurnOn()                        //what to do if yes
-            //    ));
-            //hub.AddRule(new AutomationRule
-            //    (
-            //        condition: temp => temp <= 20 || temp >= 25,
-            //        action: () => light.TurnOff()
-            //    ));
-            //var hour = clock.Now.Hour;
             hub.AddRule(new AutomationRule
                 (
                     //condition: temp => temp >= 17,
                     condition: sensor => sensor is TemperatureSensor && tempSensor.Temperature >= 17,
                     action: () => heater.TurnOff()
                 ));
-            //hub.AddRule(new AutomationRule
-            //    (
-            //        condition: temp => temp < 17,
-            //        action: () => heater.TurnOn()
-            //    ));
-            //hub.AddRule(new AutomationRule
-            //    (
-            //        condition: hour => hour >= 16 && hour <= 24 || hour >= 5 && hour < 6,
-            //        action: () => light.TurnOn()
-            //    ));
-            //hub.AddRule(new AutomationRule
-            //    (
-            //        condition: hour => hour < 16 && hour >= 6 || hour >= 24 || hour < 5,
-            //        action: () => light.TurnOff()
-            //    ));
+            hub.AddRule(new AutomationRule
+                (
+                    //condition: temp => temp < 17,
+                    condition: sensor => sensor is TemperatureSensor && tempSensor.Temperature < 17,
+                    action: () => heater.TurnOn()
+                ));
+            hub.AddRule(new AutomationRule
+                (
+                    //condition: hour => hour >= 16 && hour <= 24 || hour >= 5 && hour < 6,
+                    condition: sensor => sensor is ControlledClock && (clock.Now.Hour >= 16 && clock.Now.Hour < 24 || clock.Now.Hour >= 5 && clock.Now.Hour < 6),
+                    action: () => light.TurnOn()
+                ));
+            hub.AddRule(new AutomationRule
+                (
+                    //condition: hour => hour < 16 && hour >= 6 || hour >= 24 || hour < 5,
+                    condition: sensor => sensor is ControlledClock && (clock.Now.Hour < 16 && clock.Now.Hour >= 6 || clock.Now.Hour >= 24 || clock.Now.Hour < 5),
+                    action: () => light.TurnOff()
+                ));
 
-            BlockOfProgram(heater, tempSensor, clock, light, 12, 0, 20);
-            Thread.Sleep(2000);
             BlockOfProgram(heater, tempSensor, clock, light, 12, 0, 20);
             Thread.Sleep(2000);
             BlockOfProgram(heater, tempSensor, clock, light, 16, 33, 17);
@@ -88,19 +77,10 @@ namespace SmartHomeSimulator
                 $"It's {clock.Now:HH:mm} and the {light.Name} state: {(light.IsOn ? "On" : "Off")}\n"
                 );
         }
-        public static void StatusCheck(TemperatureSensor tempSensor, Light light, ControlledClock clock)
-        {
-            //Console.WriteLine($"Temperature: {tempSensor.Temperature}°C, Light state: {(light.IsOn ? "On" : "Off")} and it's {Clock.Instance.Now.ToString("HH:mm")} О'clock");
-            Console.WriteLine($"Temperature: {tempSensor.Temperature}°C, Light state: {(light.IsOn ? "On" : "Off")} and it's {clock.Now.ToString("HH:mm")} О'clock");
-        }
-        public static void StatusCheck( Light light, ControlledClock clock)
-        {
-            //Console.WriteLine($"Temperature: {tempSensor.Temperature}°C, Light state: {(light.IsOn ? "On" : "Off")} and it's {Clock.Instance.Now.ToString("HH:mm")} О'clock");
-            Console.WriteLine($"Light state: {(light.IsOn ? "On" : "Off")} and it's {clock.Now.ToString("HH:mm")} О'clock");
-        }
+      
         public static void BlockOfProgram(Heater heater, TemperatureSensor tempSensor, ControlledClock clock,  Light light, int h, int min, int temp) {
-            clock.SetTime(DateTime.Today.AddHours(h).AddMinutes(min));
-            tempSensor.SetTemperature(temp); //problem
+            clock.SetTime(DateTime.Today.AddHours(h).AddMinutes(min), clock);
+            tempSensor.SetTemperature(temp, tempSensor); //problem
             StatusCheck(tempSensor, heater, light, clock);
         }
     }
