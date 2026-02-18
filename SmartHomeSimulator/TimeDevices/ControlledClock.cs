@@ -15,6 +15,7 @@ namespace SmartHomeSimulator.TimeDevices
         public static ControlledClock Instance => _instance.Value;
 
         private DateTime _time;
+        public event Action<double> OnTimeChanged;
 
         private ControlledClock() : base("Controlled Clock")
         {
@@ -27,6 +28,7 @@ namespace SmartHomeSimulator.TimeDevices
         public void SetTime(DateTime time)
         {
             _time = time;
+            OnTimeChanged?.Invoke(time.Hour);
         }
     }
 }

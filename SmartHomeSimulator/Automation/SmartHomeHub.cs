@@ -1,5 +1,6 @@
 ﻿using SmartHomeSimulator.Devices;
 using SmartHomeSimulator.Sensors;
+using SmartHomeSimulator.TimeDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace SmartHomeSimulator.Automation
         private List<Device> devices = new List<Device>();
         private List<Sensor> sensors = new List<Sensor>();
         private List<AutomationRule> rules = new List<AutomationRule>();
+        private List<TimeDevice> tDevices = new List<TimeDevice>();
 
         // Реєстрація пристроїв 
         public void RegisterDevice(Device device)
@@ -30,7 +32,19 @@ namespace SmartHomeSimulator.Automation
             {
                 tempSensor.OnTemperatureChanged += value => EvaluateRules(value);
             }
+            
         }
+        public void RegisterTDevice( TimeDevice timeDevice)
+        {
+            tDevices.Add(timeDevice);
+            // Підписка на події temperature сенсора
+           
+            if (timeDevice is ControlledClock clock)
+            {
+                clock.OnTimeChanged += value => EvaluateRules(value);
+            }
+        }
+
         // Додавання правил автоматизації
         public void AddRule(AutomationRule rule)
         {
