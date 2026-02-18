@@ -1,6 +1,7 @@
 ﻿using SmartHomeSimulator.Devices;
 using SmartHomeSimulator.Sensors;
 using SmartHomeSimulator.TimeDevices;
+using SmartHomeSimulator.SH_IntelDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace SmartHomeSimulator.Automation
             devices.Add(device);
         }
         // Реєстрація сенсорів
-        public void RegisterSensor(Sensor sensor)
+        public void RegisterSensor(Sensor sensor)               //problema
         {
             sensors.Add(sensor);
 
@@ -37,7 +38,7 @@ namespace SmartHomeSimulator.Automation
         public void RegisterTDevice( TimeDevice timeDevice)
         {
             tDevices.Add(timeDevice);
-            // Підписка на події temperature сенсора
+            // Підписка на події timedevice
            
             if (timeDevice is ControlledClock clock)
             {
@@ -51,7 +52,7 @@ namespace SmartHomeSimulator.Automation
             rules.Add(rule);
         }
         // Оцінка правил при зміні температури
-        private void EvaluateRules(double value)
+        private void EvaluateRules(IntelDevice value)
         {
             foreach (var rule in rules)
             {

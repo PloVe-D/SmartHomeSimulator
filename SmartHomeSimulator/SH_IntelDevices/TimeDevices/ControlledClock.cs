@@ -19,7 +19,7 @@ namespace SmartHomeSimulator.TimeDevices
 
         private ControlledClock() : base("Controlled Clock")
         {
-            _time = DateTime.Today.AddHours(14).AddMinutes(30);
+            
         }
 
         public override DateTime Now => _time;

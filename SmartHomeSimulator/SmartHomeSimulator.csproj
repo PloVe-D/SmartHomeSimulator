@@ -51,11 +51,12 @@
     <Compile Include="Devices\Light.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeDevices\Clock.cs" />
-    <Compile Include="Sensors\Sensor.cs" />
-    <Compile Include="Sensors\TemperatureSensor.cs" />
-    <Compile Include="TimeDevices\ControlledClock.cs" />
-    <Compile Include="TimeDevices\TimeDevice.cs" />
+    <Compile Include="SH_IntelDevices\IntelDevice.cs" />
+    <Compile Include="SH_IntelDevices\TimeDevices\Clock.cs" />
+    <Compile Include="SH_IntelDevices\Sensors\Sensor.cs" />
+    <Compile Include="SH_IntelDevices\Sensors\TemperatureSensor.cs" />
+    <Compile Include="SH_IntelDevices\TimeDevices\ControlledClock.cs" />
+    <Compile Include="SH_IntelDevices\TimeDevices\TimeDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

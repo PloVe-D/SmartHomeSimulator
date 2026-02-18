@@ -1,4 +1,5 @@
 ﻿using System;
+using SmartHomeSimulator.SH_IntelDevices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulator.TimeDevices
 {
-    public abstract class TimeDevice
+    public abstract class TimeDevice : IntelDevice
     {
         public abstract DateTime Now { get; }
-        public string Name { get; private set; }
-        protected TimeDevice(string name)
-        {
-            Name = name;
-        }
+        
+        protected TimeDevice(string name) : 
+            base(name){}
 
 
         public virtual void PrintTime()
